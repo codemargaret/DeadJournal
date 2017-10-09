@@ -4,12 +4,27 @@ function DJEntry(title, body) {
   this.body = body;
 }
 
-DJEntry.prototype.title = function(title) {
-  return title;
+DJEntry.prototype.wordCount = function(words) {
+  var wordsToCount = words.split(" ").length;
+  return wordsToCount;
 };
 
-DJEntry.prototype.body = function(body) {
-  return body;
+DJEntry.prototype.vowelCount = function(words) {
+  var vowelNumber = words.match(/[aeiou]/gi).length;
+  return vowelNumber;
+};
+
+DJEntry.prototype.consonantCount = function(words) {
+  var consonantNumber = words.match(/[bcdfghjklmnpqrstvwxyz]/gi).length;
+  return consonantNumber;
+};
+
+DJEntry.prototype.getTeaser = function(words) {
+  array = []
+  var wordsToCount = words.split(" ")
+  for (i = 0; i <= 7; i ++)
+  array.push(wordsToCount[i])
+  return array.join(" ")
 };
 
 exports.DJEntryModule = DJEntry;
@@ -18,22 +33,28 @@ exports.DJEntryModule = DJEntry;
 var DJEntry = require('./../js/journal.js').DJEntryModule;
 
 $(document).ready(function() {
-  console.log("document ready");
   $('#entry-form').submit(function(event) {
 
     event.preventDefault();
-    console.log("entry form submit");
     var title = $('#title').val();
     var body = $('#body').val();
-    console.log(body);
-    var newEntry = new DJEntry();
 
+    var newEntry = new DJEntry(title, body);
+    var wordCount = newEntry.wordCount(body);
+    var vowelCount = newEntry.vowelCount(body);
+    var consonantCount = newEntry.consonantCount(body);
+    var getTeaser = newEntry.getTeaser(body);
     // var output = $()
 
-    $("#titleoutput").append("<li><h1>" + title + "</h1></li>");
-    $("#titleoutput").append("<li><h3>" + body + "</h3></li>");
 
+    $("#titleoutput").append("<li><h1>" + title + "</h1></li>");
+    $("#titleoutput").append("<li><h3>" + "Teaser:" + getTeaser + "</h3></li>");
+    $("#titleoutput").append("<li><h3>" + body + "</h3></li>");
+    $("#titleoutput").append("<li><h3>" + "There are " + wordCount + " words in this entry." + "</h3></li>");
+    $("#titleoutput").append("<li><h3>" + "There are " + vowelCount + " vowels in this entry." + "</h3></li>");
+    $("#titleoutput").append("<li><h3>" + "There are " + consonantCount + " consonants in this entry." + "</h3></li>");
   });
 });
+
 
 },{"./../js/journal.js":1}]},{},[2]);
