@@ -21,9 +21,6 @@
 | Shows the number of vowels     | Today I saw a bird.    | There are 6 vowels in this entry.      |
 | Shows the number of consonants     | Today I saw a bird.    | There are 8 words in this entry.      |
 
-## Future Features
-* _Expand testing._
-
 ## Setup/Installation Requirements
 _Run the following commands in Terminal:_
 
